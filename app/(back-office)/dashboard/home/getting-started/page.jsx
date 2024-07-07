@@ -1,6 +1,6 @@
 import React from 'react'
 
-function page() {
+function GettingStarted() {
   return (
     <div>
       <h1>Getting started</h1>
@@ -8,4 +8,4 @@ function page() {
   )
 }
 
-export default page
+export default GettingStarted
