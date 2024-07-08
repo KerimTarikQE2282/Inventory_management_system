@@ -1,10 +1,11 @@
 import React from 'react'
 import Header from '@/Components/dashboard/Header'
+import Sidebar from '@/Components/dashboard/Sidebar'
 export default function Layout({children}) {
   return (
     <div className='flex'>
-      <div className='w-56 min-h-screen bg-slate-900  text-slate-50'> side bar</div>
-      <main className='w-full bg-slate-100 min-h-screen'> 
+     <Sidebar/>
+      <main className=' ml-60 w-full bg-slate-100 min-h-screen'> 
         <Header/>
         {children}</main>
      
