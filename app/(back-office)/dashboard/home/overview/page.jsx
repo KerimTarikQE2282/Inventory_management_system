@@ -1,11 +1,12 @@
 import React from 'react'
 import DashBoardBanner from '../Components/DashBoardBanner'
+import SalesOverview from '../Components/SalesOverview'
 
 export default function Dashboard() {
   return (
     <div>
       <DashBoardBanner/>
-      <h2>dashboard</h2>
+      <SalesOverview/>
     </div>
   )
 }
