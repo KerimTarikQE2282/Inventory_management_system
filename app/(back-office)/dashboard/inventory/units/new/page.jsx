@@ -33,6 +33,7 @@ export default function NewUnit() {
       
    } catch (error) {
     console.log(error)
+    setLoading(false)
    }
   }
   return (
@@ -53,7 +54,7 @@ export default function NewUnit() {
 
 
         </div>
-       <SubumitButton title="New Unit"/>
+       <SubumitButton title="New Unit" isLoading={loading}/>
 
       </form>
     </div>

@@ -33,6 +33,7 @@ export default function NewWareHouse() {
       
    } catch (error) {
     console.log(error)
+    setLoading(false)
    }
   }
   return (
@@ -87,7 +88,7 @@ export default function NewWareHouse() {
 
 
         </div>
-       <SubumitButton title="New Brand"/>
+       <SubumitButton title="New Brand" isLoading={loading}/>
 
       </form>
     </div>

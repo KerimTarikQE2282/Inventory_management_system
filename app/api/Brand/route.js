@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import db from "@/lib/db";
 
 export async function POST(request) {
     try {
@@ -8,11 +9,17 @@ export async function POST(request) {
         // Log the parsed JSON correctly
         console.log({ BrandName });
 
-        const newBrand = { BrandName } ;
+        const AddedBrand=await db.brands.create({
+            data:{
+                BrandName
+            }
+        })
+        // Log the new category object
+        console.log(AddedBrand);
         
         // Log the new category object
         
-        return NextResponse.json(newBrand);  
+        return NextResponse.json(AddedBrand);  
     } catch (error) {
         console.log(error);
         return NextResponse.json(
