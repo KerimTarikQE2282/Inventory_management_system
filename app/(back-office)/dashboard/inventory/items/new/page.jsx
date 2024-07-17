@@ -12,6 +12,7 @@ import { UploadDropzone } from "@uploadthing/react";
 import { Pencil } from "lucide-react";
 import Image from "next/image";
 import ImageInput from "@/Components/FormInputs/ImageInput";
+import { makePOSTApiRequest } from "@/lib/apiRequest";
 
 export default function NewItem() {
   
@@ -46,28 +47,7 @@ export default function NewItem() {
   async function onSubmit(data){
    
             
-    const baseUrl='http://localhost:3000'
-    data.imageUrl=imageUrl;
-    console.log(data)
-   try {
-    setLoading(true)
-    const response=await fetch(`${baseUrl}/api/item`,{
-      method:'POST',
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify(data)
-     })
-      console.log(data);
-      if(response.ok){
-        console.log(response.json());
-        setLoading(false)
-        reset();
-      }
-      
-   } catch (error) {
-    console.log(error)
-   }
+    makePOSTApiRequest('Item',setLoading,data,'Items')
   }
   return (
     <div>
@@ -118,7 +98,7 @@ export default function NewItem() {
       <TextAreaInputs  label="Notes " name="ItemNotes"  type="text" width='full'   register={register}  errors={errors}/>
         <ImageInput label="Item " imageURL={imageUrl} setImageUrl={setImageUrl} />
         </div>
-       <SubumitButton title="New Item"/>
+       <SubumitButton title="New Item" isLoading={loading}/>
 
       </form>
     </div>

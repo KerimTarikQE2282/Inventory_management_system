@@ -1,4 +1,4 @@
-import { BaggageClaim, Box, Boxes, Building2, ChevronDown, ChevronRight, Codesandbox, Edit, PlusCircle, Ruler, Warehouse } from 'lucide-react';
+import { BaggageClaim, Box, Boxes, Building2, ChevronDown, ChevronRight, Codesandbox, Contact, Edit, Factory, PlusCircle, Ruler, Warehouse } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
 import {
@@ -37,13 +37,18 @@ function InventorySideBarComponent() {
       },
       {
         name:"Inventory Adjustments",
-        link:"/dashboard/inventory/adjustments",
+        link:"/dashboard/inventory/adjustments/new",
         icon:<Edit className='w-4 h-4'/>
       },
       {
         name:"Composite items",
         link:"/dashboard/inventory",
         icon:<Codesandbox className='w-4 h-4'/>
+      },
+      {
+        name:"Supplier",
+        link:"/dashboard/inventory/Supplier/new",
+        icon:<Factory className='w-4 h-4'/>
       }
     ]
     const InventoryList=inventoryLinks.map((link)=>{

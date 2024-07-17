@@ -13,28 +13,99 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Category{
-  is String  @id   @default(auto()) @map("_id") @db.ObjectId
-  title String
+model Item {
+  id                       String                     @id @default(auto()) @map("_id") @db.ObjectId
+  title                    String
+  description              String?
+  category                 Category                   @relation(fields: [categoryId], references: [id])
+  categoryId               String                     @db.ObjectId
+  sku                      String                     @unique
+  barcode                  String?
+  quantity                 Int
+  unit                     Units                      @relation(fields: [unitId], references: [id])
+  unitId                   String                     @db.ObjectId
+  brand                    Brands                     @relation(fields: [brandId], references: [id])
+  brandId                  String                     @db.ObjectId
+  supplier                 Supplier                   @relation(fields: [supplierid], references: [id])
+  supplierid               String                     @db.ObjectId
+  costPrice                Float
+  sellingPrice             Float
+  reorderPoint             Int
+  location                 String?
+  imagesUrl                String
+  weight                   Float?
+  dimensions               String?
+  taxRate                  Float
+  notes                    String?
+  AddStockAdjustments      AddStockAdjustments[]
+  TransferStockAdjustments TransferStockAdjustments[]
+}
+
+model Category {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
   description String?
+  Item        Item[]
 }
 
-model Brands{
-  id String  @id   @default(auto()) @map("_id") @db.ObjectId
+model Brands {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
   BrandName String
-  
+  Item      Item[]
 }
 
-model Units{
-  id String  @id   @default(auto()) @map("_id") @db.ObjectId
-  UnitName String
+model Units {
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
+  UnitName        String
   UnitAbreviation String?
+  Item            Item[]
 }
 
-model WareHouse{
-  id String  @id   @default(auto()) @map("_id") @db.ObjectId
-  WareHouseName String
-  WareHouseLocation String
-  WareHouseDescription String?
-  WareHouseType String?
+model WareHouse {
+  id                                String                     @id @default(auto()) @map("_id") @db.ObjectId
+  WareHouseName                     String
+  WareHouseLocation                 String
+  WareHouseDescription              String?
+  WareHouseType                     String?
+  AddStockAdjustments               AddStockAdjustments[]
+  sendingTransferStockAdjustments   TransferStockAdjustments[] @relation("SendingWareHouse")
+  recievingTransferStockAdjustments TransferStockAdjustments[] @relation("RecievingWareHouse")
+}
+
+model AddStockAdjustments {
+  id                   String    @id @default(auto()) @map("_id") @db.ObjectId
+  ReferenceNumber      String
+  AddStockQty          Int
+  wareHouse            WareHouse @relation(fields: [WareHouseId], references: [id])
+  WareHouseId          String    @db.ObjectId
+  AddingInventoryNotes String
+  item                 Item      @relation(fields: [itemid], references: [id])
+  itemid               String    @db.ObjectId
+}
+
+model TransferStockAdjustments {
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  ReferenceNumber    String
+  TransferStockQty   Int
+  SendingWareHouse   WareHouse @relation("SendingWareHouse", fields: [SendingBranchId], references: [id])
+  SendingBranchId    String    @db.ObjectId
+  RecievingWareHouse WareHouse @relation("RecievingWareHouse", fields: [RecievingBanchId], references: [id])
+  RecievingBanchId   String    @db.ObjectId
+  Notes              String
+  item               Item      @relation(fields: [itemid], references: [id])
+  itemid             String    @db.ObjectId
+}
+
+model Supplier {
+  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  name          String
+  phone         String?
+  email         String?
+  address       String?
+  contactPerson String?
+  supplierCode  String  @unique
+  PaymentTerms  String?
+  taxID         String?
+  notes         String?
+  Item          Item[]
 }
