@@ -3,9 +3,9 @@ import { useForm } from "react-hook-form";
 import React from 'react';
 import FormHeader from '../../InventoryComponents/FormHeaders';
 import TextInput from "@/Components/FormInputs/TextInput";
-
+import toast from "react-hot-toast";
 import SubumitButton from "@/Components/FormInputs/SubumitButton";
-import TextAreaInputs from "@/Components/FormInputs/TextAreaInputs";
+import { makePOSTApiRequest } from "@/lib/apiRequest";
 
 export default function NewBrand() {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -13,28 +13,8 @@ export default function NewBrand() {
 
   async function onSubmit(data){
     
-    const baseUrl='http://localhost:3000'
-    console.log(data)
-   try {
-    setLoading(true)
-    const response=await fetch(`${baseUrl}/api/Brand`,{
-      method:'POST',
-      headers:{
-        "Content-Type":"application/json"
-      },
-      body:JSON.stringify(data)
-     })
-      console.log(data);
-      if(response.ok){
-        console.log(response.json());
-        setLoading(false)
-        reset();
-      }
-      
-   } catch (error) {
-    console.log(error)
-    setLoading(false)
-   }
+    makePOSTApiRequest('Brand',setLoading,data,'Brand')
+
   }
   return (
     <div>

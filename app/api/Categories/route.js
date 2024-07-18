@@ -30,3 +30,23 @@ export async function POST(request) {
         ); 
     }
 }
+export async function GET (request){
+    try {
+        
+    const Categories=await db.category.findMany({
+        orderBy:{
+            createdAt:'desc' //gets the latest Category
+        }
+    })
+    return NextResponse.json(Categories);
+    } catch (error) {
+         console.log(error);
+            return NextResponse.json(
+                {
+                    error,
+                    message: "Failed to Fetch  the Categories"
+                },
+                { status: 500 }
+            ); 
+    }
+    }

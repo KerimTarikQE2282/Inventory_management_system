@@ -1,6 +1,9 @@
+'use client'
 import React from 'react'
 
 export default function SelectComponent({ name, label, register, error, className, options }) {
+  console.log(options)
+  console.log(options)
     return (
       <div>
         <label 
@@ -14,10 +17,10 @@ export default function SelectComponent({ name, label, register, error, classNam
           {...register(name)} 
           className={`bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 ${className}`}
         >
-          <option value="">Choose a country</option>
+          <option value="">Choose a Category</option>
           {options.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
+            <option key={option.title} value={option.id}>
+              {option.title}
             </option>
           ))}
         </select>

@@ -30,3 +30,24 @@ export async function POST(request) {
         ); 
     }
 }
+
+export async function GET (request){
+    try {
+        
+    const Units=await db.units.findMany({
+        orderBy:{
+            createdAt:'desc' //gets the latest warehouse
+        }
+    })
+    return NextResponse.json(Units);
+    } catch (error) {
+         console.log(error);
+            return NextResponse.json(
+                {
+                    error,
+                    message: "Failed to Fetch  the Units"
+                },
+                { status: 500 }
+            ); 
+    }
+    }

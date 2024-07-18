@@ -26,9 +26,30 @@ export async function POST(request) {
         return NextResponse.json(
             {
                 error,
-                message: "Failed to create the category"
+                message: "Failed to create the Warehouse"
             },
             { status: 500 }
         ); 
     }
+}
+
+export async function GET (request){
+try {
+    
+const WareHouses=await db.wareHouse.findMany({
+    orderBy:{
+        createdAt:'desc' //gets the latest warehouse
+    }
+})
+return NextResponse.json(WareHouses);
+} catch (error) {
+     console.log(error);
+        return NextResponse.json(
+            {
+                error,
+                message: "Failed to Fetch  the Warehouse"
+            },
+            { status: 500 }
+        ); 
+}
 }

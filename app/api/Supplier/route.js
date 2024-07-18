@@ -4,48 +4,67 @@ import db from "@/lib/db";
 export async function POST(request) {
     try {
         // Destructure the correct variable names from the request body
-        const { BrandName } = await request.json();
+        const { 
+            name,
+            phone,
+            email,
+            address,
+            contactPerson,
+            supplierCode,
+            taxID,
+            PaymentTerms,
+            notes,
+         } = await request.json();
 
         // Log the parsed JSON correctly
-        console.log({ BrandName });
+        
 
-        const AddedBrand=await db.brands.create({
+        const AddedSuppliers=await db.supplier.create({
             data:{
-                BrandName
+                name,
+                phone,
+                email,
+                address,
+                contactPerson,
+                supplierCode,
+                taxID,
+                PaymentTerms,
+                notes,
             }
         })
         // Log the new category object
-        console.log(AddedBrand);
+        console.log(AddedSuppliers);
         
         // Log the new category object
         
-        return NextResponse.json(AddedBrand);  
+        return NextResponse.json(AddedSuppliers);  
     } catch (error) {
         console.log(error);
         return NextResponse.json(
             {
                 error,
-                message: "Failed to create the category"
+                message: "Failed to create the Supplier"
             },
             { status: 500 }
         ); 
     }
 }
+
 export async function GET (request){
     try {
         
-    const Brands=await db.brands.findMany({
+    const Suppliers=await db.supplier.findMany({
         orderBy:{
             createdAt:'desc' //gets the latest warehouse
         }
     })
-    return NextResponse.json(Brands);
+    return NextResponse.json(Suppliers);
     } catch (error) {
          console.log(error);
             return NextResponse.json(
                 {
                     error,
-                    message: "Failed to Fetch  the Brands"
+                    message: "Failed to Fetch  the Suppliers"
                 },
                 { status: 500 }
             ); 
