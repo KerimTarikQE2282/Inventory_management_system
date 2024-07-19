@@ -2,53 +2,24 @@
 import { useForm } from "react-hook-form";
 import React from 'react';
 import TextInput from "@/Components/FormInputs/TextInput";
-
 import SubumitButton from "@/Components/FormInputs/SubumitButton";
 import TextAreaInputs from "@/Components/FormInputs/TextAreaInputs";
 import SelectComponent from "@/Components/FormInputs/SelectComponent";
-import { UploadButton } from "@/lib/uploadthing";
-import { UploadDropzone } from "@uploadthing/react";
-import { Pencil } from "lucide-react";
-import Image from "next/image";
 import ImageInput from "@/Components/FormInputs/ImageInput";
 import { makePOSTApiRequest } from "@/lib/apiRequest";
-import { getData } from "@/lib/getData";
 
-export default async function CreateItemFrom({categories,units,brands,warehouses}) {
+export default  function CreateItemFrom({categories,units,brands,warehouses,suppliers}) {
   
   const [imageUrl,setImageUrl]=React.useState('')
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [loading,setLoading]=React.useState(false)
-  const countryOptions = [
-    { value: 'US', label: 'United States' },
-    { value: 'CA', label: 'Canada' },
-    { value: 'FR', label: 'France' },
-    { value: 'DE', label: 'Germany' }
-  ];
-  const fruitOptions = [
-    { value: 'apple', label: 'Apple' },
-    { value: 'banana', label: 'Banana' },
-    { value: 'orange', label: 'Orange' },
-    { value: 'mango', label: 'Mango' }
-  ];
-  const colorOptions = [
-    { value: 'red', label: 'Red' },
-    { value: 'blue', label: 'Blue' },
-    { value: 'green', label: 'Green' },
-    { value: 'yellow', label: 'Yellow' }
-  ];
-  
-  const languageOptions = [
-    { value: 'js', label: 'JavaScript' },
-    { value: 'py', label: 'Python' },
-    { value: 'java', label: 'Java' },
-    { value: 'cpp', label: 'C++' }
-  ];
-  const Categories=await getData('Categories')
+
+
   async function onSubmit(data){
-   
-            
-    makePOSTApiRequest('Item',setLoading,data,'Items')
+    data.imageURL=imageUrl
+   makePOSTApiRequest('Item',setLoading,data,'Items')
+  
+   setImageUrl('');
   }
   return (
     
@@ -56,7 +27,8 @@ export default async function CreateItemFrom({categories,units,brands,warehouses
         <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
          <TextInput label="Item Name" name="ItemName"  type="text" width='fuller'   register={register}  errors={errors}/>
          <TextInput label="Item SKU" name="ItemSKU"  type="text" width='fuller'   register={register}  errors={errors} className='w-full'/>
-         
+         <TextInput label="Item Quantity" name="ItemQuantity"  type="number" width=''   register={register}  errors={errors}  />
+
          <SelectComponent label="Category" name="Category"  type="text" width='full' options={categories}   register={register}  errors={errors}  className='w-full'/>
 
         
@@ -64,7 +36,6 @@ export default async function CreateItemFrom({categories,units,brands,warehouses
      
      
       <TextInput label="Item BarCode" name="ItemBarcode"  type="text" width='full'   register={register}  errors={errors}  />
-      <TextInput label="Item Quantity" name="ItemQuantity"  type="number" width='full'   register={register}  errors={errors}  />
 
       
 
@@ -86,7 +57,7 @@ export default async function CreateItemFrom({categories,units,brands,warehouses
   {/* ************************************Fix for WareHouse ******************************************************************* */}
          
 <SelectComponent label="WareHouse" name="WareHouse"  type="text" width='full'  options={warehouses}     register={register}  errors={errors}  className='w-full'/>
-{/* <SelectComponent label="Supplier" name="Supplier"  type="text" width='full'  options={suppliers}     register={register}  errors={errors}  className='w-full'/> */}
+<SelectComponent label="Supplier" name="Supplier"  type="text" width='full'  options={suppliers}     register={register}  errors={errors}  className='w-full'/>
 
         
       {/* ************************************untill here******************************************************************* */}

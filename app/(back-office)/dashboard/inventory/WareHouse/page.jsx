@@ -1,9 +1,18 @@
+import DataTable from '@/Components/dashboard/DataTable'
+import TabelNavBar from '@/Components/TabelNavBar'
+import { getData } from '@/lib/getData'
 import React from 'react'
 
-export default function WareHouse() {
+export default async function WareHouse() {
+  const columns=['WareHouseName','WareHouseLocation','WareHouseType']
+  const Items= await getData('WareHouse')
   return (
     <div>
-      <h1>Ware House</h1>
+             <TabelNavBar link='/dashboard/inventory/WareHouse/new' title='WareHouse'/>
+       <div className='my-4 p-8'>
+    <DataTable Data={Items } columns={columns}/>
+
+    </div>
     </div>
   )
 }

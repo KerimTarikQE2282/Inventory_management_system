@@ -6,19 +6,17 @@ import SubumitButton from "@/Components/FormInputs/SubumitButton";
 import TextAreaInputs from "@/Components/FormInputs/TextAreaInputs";
 import SelectComponent from "@/Components/FormInputs/SelectComponent";
 import { makePOSTApiRequest } from "@/lib/apiRequest";
-
-export default function TransferInventoryForm() {
+import toast from "react-hot-toast";
+export default function TransferInventoryForm({items,WareHouses}) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [loading,setLoading]=React.useState(false)
-  const countryOptions = [
-    { value: 'US', label: 'United States' },
-    { value: 'CA', label: 'Canada' },
-    { value: 'FR', label: 'France' },
-    { value: 'DE', label: 'Germany' }
-  ];
   async function onSubmit(data){
-    
-    makePOSTApiRequest('/adjustments/transfer',setLoading,data,'Inventory')
+    if(data.RecievingBanchId==data.SendingBranchId){
+      toast.error('You are sending data to the same branch !', {icon: '❌'})
+    }else{
+      makePOSTApiRequest('/adjustments/transfer',setLoading,data,'a transfer Inventory')
+    }
+   
 
   }
   return (
@@ -34,7 +32,7 @@ export default function TransferInventoryForm() {
           register={register}
           error={errors}
           width='' 
-          options={countryOptions}
+          options={items}
           />
         <SelectComponent
           name="RecievingBanchId" 
@@ -42,7 +40,7 @@ export default function TransferInventoryForm() {
           register={register}
           error={errors}
           
-          options={countryOptions}
+          options={WareHouses}
           />
           <SelectComponent
           name="SendingBranchId" 
@@ -50,7 +48,7 @@ export default function TransferInventoryForm() {
           register={register}
           error={errors}
           
-          options={countryOptions}
+          options={WareHouses}
           />
                         <TextInput label="Enter Quantity of Stock To transfer" name="TransferStockQty"  type="text" width='full'   register={register}  errors={errors}/>
 

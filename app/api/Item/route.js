@@ -23,7 +23,7 @@ export async function POST(request) {
 
 title :ItemName  ,                 
 description:ItemDescription   ,                            
- categoryId:'6696875a8212d69a17d385d0'  ,             
+ categoryId:'6699060e0cc9f116a43394e4'  ,             
 sku:ItemSKU        ,              
 barcode:ItemBarcode ,                 
 quantity:ItemQuantity ,                                   
@@ -65,6 +65,9 @@ export async function GET (request){
     const Items=await db.item.findMany({
         orderBy:{
             createdAt:'desc' //gets the latest warehouse
+        },
+        include:{
+            category:true
         }
     })
     return NextResponse.json(Items);

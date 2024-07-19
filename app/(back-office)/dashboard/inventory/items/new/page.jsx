@@ -2,28 +2,29 @@
 
 import React from 'react';
 import FormHeader from '../../InventoryComponents/FormHeaders';
-import CreateItemFrom from '@/Components/dashboard/CreateItemFrom';
+import CreateItemFrom from '@/Components/dashboard/Forms/CreateItemFrom';
 import { getData } from "@/lib/getData";
 
 export default async function NewItem() {
   
 
 
-  const Categories=await getData('Categories');
-  console.log(Categories)
-  const Units=await getData('Units')
-  const Brands=await getData('Brand')
-  const WareHouse=await getData('WareHouse')
-  const Supplier=await getData('Supplier')
+  const CategoriesData= getData('Categories');
+  const UnitsData= getData('Units')
+  const BrandDatas= getData('Brand')
+  const WareHouseData= getData('WareHouse')
+  const SupplierData= getData('Supplier')
 
+  const [Categories,Units,Brands,WareHouse,Supplier]=await Promise.all([CategoriesData,UnitsData,BrandDatas,WareHouseData,SupplierData])
 
 
   return (
     <div>
       {/* { header } */}
-      <FormHeader title="New Item" link={'#'} />
+      <FormHeader title="New Item" link={'/dashboard/inventory/items'} />
       {/* { Form } */}
-<CreateItemFrom categories={Categories}
+<CreateItemFrom 
+categories={Categories}
 units={Units}
 brands={Brands}
 warehouses={WareHouse}

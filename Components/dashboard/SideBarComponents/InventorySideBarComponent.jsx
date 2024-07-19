@@ -1,4 +1,4 @@
-import { BaggageClaim, Box, Boxes, Building2, ChevronDown, ChevronRight, Codesandbox, Contact, Edit, Factory, PlusCircle, Ruler, Warehouse } from 'lucide-react';
+import { BaggageClaim, Box, Boxes, Building2, ChevronDown, ChevronRight, Codesandbox, Contact, Edit, Factory, PlusCircle, Ruler, Wallpaper, Warehouse } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
 import {
@@ -11,43 +11,48 @@ function InventorySideBarComponent() {
 
     const inventoryLinks=[
       {
+        name:"All",
+        link:"/dashboard/inventory/",
+        icon:<Wallpaper className='w-4 h-4'/>
+      },,
+      {
         name:"Items",
-        link:"/dashboard/inventory/items/new",
+        link:"/dashboard/inventory/items/",
         icon:<Box className='w-4 h-4'/>
       },
       {
         name:"Categories",
-        link:"/dashboard/inventory/Categories/new",
+        link:"/dashboard/inventory/Categories/",
         icon:<Boxes className='w-4 h-4'/>
       },
       {
         name:"Brands",
-        link:"/dashboard/inventory/Brands/new",
+        link:"/dashboard/inventory/Brands/",
         icon:<Building2 className='w-4 h-4'/>
       },
       {
         name:"Units",
-        link:"/dashboard/inventory/units/new",
+        link:"/dashboard/inventory/units/",
         icon:<Ruler className='w-4 h-4'/>
       },
       {
         name:"Ware House",
-        link:"/dashboard/inventory/WareHouse/new",
+        link:"/dashboard/inventory/WareHouse/",
         icon:<Warehouse className='w-4 h-4'/>
       },
       {
         name:"Inventory Adjustments",
-        link:"/dashboard/inventory/adjustments/new",
+        link:"/dashboard/inventory/adjustments/",
         icon:<Edit className='w-4 h-4'/>
       },
-      {
-        name:"Composite items",
-        link:"/dashboard/inventory",
-        icon:<Codesandbox className='w-4 h-4'/>
-      },
+      // {
+      //   name:"Composite items",
+      //   link:"/dashboard/inventory",
+      //   icon:<Codesandbox className='w-4 h-4'/>
+      // },
       {
         name:"Supplier",
-        link:"/dashboard/inventory/Supplier/new",
+        link:"/dashboard/inventory/Supplier/",
         icon:<Factory className='w-4 h-4'/>
       }
     ]
@@ -61,10 +66,13 @@ function InventorySideBarComponent() {
               </Link>
         );
       })
+      const changeChevron=()=>{
+        setInventoryopen(!inventoryOpen)
+      }
   return (
    
       <Collapsible >
-      <CollapsibleTrigger CollapsibleTrigger className='flex items-center space-x-2 p-2'  >
+      <CollapsibleTrigger CollapsibleTrigger className='flex items-center space-x-2 p-2' onClick={changeChevron}  >
         <BaggageClaim className='w-4 h-4'/>
         
         <span> Inventory</span>

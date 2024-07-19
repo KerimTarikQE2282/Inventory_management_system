@@ -27,3 +27,24 @@ export async function POST(request){
         )
     }
 }
+
+export async function GET (request){
+    try {
+        
+    const transferStockAdjustments=await db.transferStockAdjustments.findMany({
+        orderBy:{
+            createdAt:'desc' //gets the latest Category
+        }
+    })
+    return NextResponse.json(transferStockAdjustments);
+    } catch (error) {
+         console.log(error);
+            return NextResponse.json(
+                {
+                    error,
+                    message: "Failed to Fetch  the transfered Stock Adjustments"
+                },
+                { status: 500 }
+            ); 
+    }
+    }
