@@ -5,7 +5,7 @@ export default function Layout({children}) {
   return (
     <div className='flex'>
      <Sidebar/>
-      <main className=' ml-60 w-full bg-slate-100 min-h-screen'> 
+      <main className=' sm:ml-60 ml-0 sm:block w-full bg-slate-100 min-h-screen'> 
         <Header/>
         {children}</main>
      

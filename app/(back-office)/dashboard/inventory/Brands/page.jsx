@@ -10,7 +10,7 @@ export default async function Brands() {
     <div>
         <TabelNavBar link='/dashboard/inventory/Brands/new' title='Brands'/>
        <div className='my-4 p-8'>
-    <DataTable Data={Items } columns={columns}/>
+    <DataTable Data={Items } columns={columns} resourceTitle='Brands'/>
 
     </div>
     </div>

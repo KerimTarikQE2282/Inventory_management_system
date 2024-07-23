@@ -2,7 +2,7 @@ import { Columns, Pencil, Trash } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 
-export default function DataTable({Data,columns=['']}) {
+export default function DataTable({Data,columns=[''],resourceTitle}) {
  
   return (
     
@@ -34,10 +34,11 @@ export default function DataTable({Data,columns=['']}) {
                     return (
                         title !== 'id' ? (<td className="px-14 py-4 ">{mydata[title]}</td>) : null
                     )
-                })
+                }
+                )
                }
                <td className=" py-4 flex gap-10  ">
-                    <Link href={''} className='font-medium text-blue item-center space-x-2 text-blue-500'><Pencil className='text'/></Link>
+                    <Link href={`/dashboard/inventory/${resourceTitle}/update/${mydata.id}`} className='font-medium text-blue item-center space-x-2 text-blue-500'><Pencil className='text'/></Link>
                    
                 </td>
                 <td>

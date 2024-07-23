@@ -5,10 +5,11 @@ import React from 'react'
 
 export default async function Adjustments() {
   const StockAddcolumns=['AddStockQty','ReferenceNumber']
-  const StockAdd=await getData('/adjustments/add')
+  const StockAddData= getData('/adjustments/add')
 
   const StockTransfercolumns=['TransferStockQty','ReferenceNumber']
-  const StockTransfered=await getData('/adjustments/transfer')
+  const StockTransferedData= getData('/adjustments/transfer')
+  const [StockAdd,StockTransfered]=await promise.all([StockAdd,StockTransfered])
   return (
     <div>
        <TabelNavBar link='/dashboard/inventory/adjustments/new' title='Adjustments'/>
@@ -21,7 +22,7 @@ export default async function Adjustments() {
     <div className='my-4 p-8'>
     <h2 className='p-4 text-xl font-semibold'>Stock Transfer Table </h2>
     <DataTable Data={StockTransfered } columns={StockTransfercolumns}/>
-
+hi ridu how are you are ypu fine im am 
     </div>
     </div>
   )
