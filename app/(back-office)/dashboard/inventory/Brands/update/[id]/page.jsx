@@ -1,10 +1,13 @@
 import React from 'react'
-
-export default function Update({params:id}) {
-    
+import NewBrand from '../../new/page'
+import { getDataById } from '@/lib/getDataByid'
+export default async function Update({params:id}) {
+    const data=await getDataById('Brand',id)
+    console.log('from form',data)
   return (
-    <div>
-      <h2>the update form for {id.id}</h2>
-    </div>
+
+     
+      <NewBrand initialData={data} isupdate={true}/>
+    
   )
 }
