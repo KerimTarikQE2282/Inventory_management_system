@@ -5,18 +5,18 @@ import { data } from "autoprefixer";
 export async function GET (request,{params:{id}}){
     try {
         
-    const Brands=await db.brands.findUnique({
+    const Unit=await db.units.findUnique({
         where:{
             id
         }
     })
-    return NextResponse.json(Brands);
+    return NextResponse.json(Unit);
     } catch (error) {
          console.log(error);
             return NextResponse.json(
                 {
                     error:error,
-                    message: "Failed to Fetch  the Brands"
+                    message: "Failed to Fetch  the Unit"
                 },
                 { status: 500 }
             ); 
@@ -29,26 +29,26 @@ export async function GET (request,{params:{id}}){
     export async function PUT(request, { params }) {
         try {
             const  data  = await request.json();
-            console.log('Received title:', data.BrandName);
-            console.log('Received id:', params.id);
+       
     
-            const brand = await db.brands.update({
+            const Unit = await db.units.update({
                 where: {
                     id: params.id
                 },
                 data: {
-                    BrandName: data.BrandName
+                    UnitName: data.UnitName,
+                    UnitAbreviation:data.UnitAbreviation
                 },
             });
     
-            console.log('Updated brand:', brand);
-            return NextResponse.json(brand);
+            console.log('Updated Unit:', Unit);
+            return NextResponse.json(Unit);
         } catch (error) {
             console.log('Error updating brand:', error);
             return NextResponse.json(
                 {
                     error: error.message,
-                    message: "Failed to update the brand"
+                    message: "Failed to update the Unit"
                 },
                 { status: 500 }
             );

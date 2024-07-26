@@ -10,7 +10,7 @@ export default async function Units() {
     <div>
               <TabelNavBar link='/dashboard/inventory/units/new' title='Unit'/>
        <div className='my-4 p-8'>
-    <DataTable Data={Items } columns={columns}/>
+    <DataTable Data={Items } resourceTitle={'units'} columns={columns}/>
 
     </div>
     </div>

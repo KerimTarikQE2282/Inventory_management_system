@@ -14,7 +14,7 @@ const columns=['title','description']
   <TabelNavBar link='/dashboard/inventory/Categories/new/' title='Categories'/>
     {/* { Table  } */}
     <div className='my-4 p-8'>
-    <DataTable Data={Categories } columns={columns}/>
+    <DataTable Data={Categories } columns={columns} resourceTitle={'Categories'}/>
 
     </div>
      

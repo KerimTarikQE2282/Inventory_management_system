@@ -5,18 +5,18 @@ import { data } from "autoprefixer";
 export async function GET (request,{params:{id}}){
     try {
         
-    const Brands=await db.brands.findUnique({
+    const Category=await db.category.findUnique({
         where:{
             id
         }
     })
-    return NextResponse.json(Brands);
+    return NextResponse.json(Category);
     } catch (error) {
          console.log(error);
             return NextResponse.json(
                 {
                     error:error,
-                    message: "Failed to Fetch  the Brands"
+                    message: "Failed to Fetch  the Categories"
                 },
                 { status: 500 }
             ); 
@@ -29,26 +29,26 @@ export async function GET (request,{params:{id}}){
     export async function PUT(request, { params }) {
         try {
             const  data  = await request.json();
-            console.log('Received title:', data.BrandName);
-            console.log('Received id:', params.id);
+            console.log('from category end point ',data)
     
-            const brand = await db.brands.update({
+            const category = await db.category.update({
                 where: {
                     id: params.id
                 },
                 data: {
-                    BrandName: data.BrandName
+                    title: data.CategoryName,
+                    description:data.CategoryDescription
                 },
             });
     
-            console.log('Updated brand:', brand);
-            return NextResponse.json(brand);
+            console.log('Updated category:', category);
+            return NextResponse.json(category);
         } catch (error) {
-            console.log('Error updating brand:', error);
+            console.log('Error updating category:', error);
             return NextResponse.json(
                 {
                     error: error.message,
-                    message: "Failed to update the brand"
+                    message: "Failed to update the category"
                 },
                 { status: 500 }
             );

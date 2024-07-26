@@ -11,7 +11,7 @@ export default async function Items() {
     <div>
        <TabelNavBar link='/dashboard/inventory/items/new' title='Items'/>
        <div className='my-4 p-8'>
-    <DataTable Data={Items } columns={columns}/>
+    <DataTable Data={Items} resourceTitle={'items'} columns={columns}/>
 
     </div>
     </div>

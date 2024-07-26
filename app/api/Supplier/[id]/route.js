@@ -5,18 +5,18 @@ import { data } from "autoprefixer";
 export async function GET (request,{params:{id}}){
     try {
         
-    const Brands=await db.brands.findUnique({
+    const Supplier=await db.supplier.findUnique({
         where:{
             id
         }
     })
-    return NextResponse.json(Brands);
+    return NextResponse.json(Supplier);
     } catch (error) {
          console.log(error);
             return NextResponse.json(
                 {
                     error:error,
-                    message: "Failed to Fetch  the Brands"
+                    message: "Failed to Fetch  the Supplier"
                 },
                 { status: 500 }
             ); 

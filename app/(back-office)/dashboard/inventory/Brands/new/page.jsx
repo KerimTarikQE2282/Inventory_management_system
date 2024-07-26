@@ -5,24 +5,38 @@ import FormHeader from '../../InventoryComponents/FormHeaders';
 import TextInput from "@/Components/FormInputs/TextInput";
 import toast from "react-hot-toast";
 import SubumitButton from "@/Components/FormInputs/SubumitButton";
-import { makePOSTApiRequest } from "@/lib/apiRequest";
+import { makePOSTApiRequest, makePUTApiRequest } from "@/lib/apiRequest";
+import { CloudCog } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function NewBrand({initialData={},isupdate=false}) {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [loading,setLoading]=React.useState(false)
-
+  const router=useRouter()
+  var done=false;
   async function onSubmit(data){
     
    
 
     if(isupdate){
       // Update Request 
+      try {
+       await makePUTApiRequest(`Brand/${initialData.id}`,setLoading,data,'Brand')
+         done=true
+         if(done==true){
+          router.replace('/dashboard/inventory/Brands')
+       }
+      } catch (error) {
+        console.log(error)
+      }
+     
     }
     else{
       makePOSTApiRequest('Brand',setLoading,data,'Brand')
     }
 
   }
+
   return (
     <div>
       {/* { header } */}
