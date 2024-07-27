@@ -40,9 +40,9 @@ var done=false
       {/* { Form } */}
       <form onSubmit={handleSubmit(onSubmit)} className='w-full max-w-4xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto my-3'>
         <div className='grid gap-4 sm:grid-cols-2 sm:gap-6'>
-         <TextInput label="WareHouse Name" name="WareHouseName" defaultValue={props.initialData.WareHouseName}  type="text" width='full'   register={register}  errors={errors}/>
-         <TextInput label="WareHouse Location" name="WareHouseLocation" defaultValue={props.initialData.WareHouseLocation}   type="text" width='full'   register={register}  errors={errors}/>
-         <TextAreaInputs  label="WareHouse Description " name="WareHouseDescription"    type="text" width='full'  defaultValue={props.initialData.WareHouseDescription}   register={register}  errors={errors}/>
+         <TextInput label="WareHouse Name" name="WareHouseName" defaultValue={props.initialData?.WareHouseName || ''}  type="text" width='full'   register={register}  errors={errors}/>
+         <TextInput label="WareHouse Location" name="WareHouseLocation" defaultValue={props.initialData?.WareHouseLocation || ''}   type="text" width='full'   register={register}  errors={errors}/>
+         <TextAreaInputs  label="WareHouse Description " name="WareHouseDescription"    type="text" width='full'  defaultValue={props.initialData?.WareHouseDescription || ''}   register={register}  errors={errors}/>
          {/* <TextInput label="Brand Name" name="WareHouseName"  type="text" width='full'   register={register}  errors={errors}/> */}
         
 
@@ -50,7 +50,7 @@ var done=false
 <input
     id="default-radio-1"
     type="radio"
-    value={props.initialData} 
+    value={props?.initialData || ''} 
     name="Main"
     {...register("WareHouseType", { required: "This field is required" })}
     className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"

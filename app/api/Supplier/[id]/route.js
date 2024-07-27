@@ -29,26 +29,35 @@ export async function GET (request,{params:{id}}){
     export async function PUT(request, { params }) {
         try {
             const  data  = await request.json();
-            console.log('Received title:', data.BrandName);
-            console.log('Received id:', params.id);
+          
     
-            const brand = await db.brands.update({
+            const Supplier = await db.supplier.update({
                 where: {
                     id: params.id
                 },
                 data: {
-                    BrandName: data.BrandName
+                    name: data.name,
+                    phone: data.phone,
+                    email:data.email,
+                    address:data.address, 
+                    contactPerson: data.contactPerson,
+                    supplierCode:data.supplierCode,
+                    PaymentTerms:data.PaymentTerms ,
+                    taxID:data.taxID,
+                    notes:data.notes ,
+                    createdAt:data.createdAt ,
+                    updatedAt: data.updatedAt,
                 },
             });
     
-            console.log('Updated brand:', brand);
-            return NextResponse.json(brand);
+            console.log('Updated Supplier:', Supplier);
+            return NextResponse.json(Supplier);
         } catch (error) {
-            console.log('Error updating brand:', error);
+            console.log('Error updating brSupplierand:', error);
             return NextResponse.json(
                 {
                     error: error.message,
-                    message: "Failed to update the brand"
+                    message: "Failed to update the Supplier"
                 },
                 { status: 500 }
             );

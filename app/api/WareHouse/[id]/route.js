@@ -31,23 +31,26 @@ export async function GET (request,{params:{id}}){
             const  data  = await request.json();
          console.log(data)
     
-            const brand = await db.brands.update({
+            const Warehouse = await db.wareHouse.update({
                 where: {
                     id: params.id
                 },
                 data: {
-                    
+             WareHouseType:  data.WareHouseType ,            
+            WareHouseName:data.WareHouseName    ,     
+            WareHouseLocation:data.WareHouseLocation  ,        
+         WareHouseDescription:data.WareHouseDescription
                 },
             });
     
-            console.log('Updated brand:', brand);
-            return NextResponse.json(brand);
+            console.log('Updated Warehouse:', Warehouse);
+            return NextResponse.json(Warehouse);
         } catch (error) {
-            console.log('Error updating brand:', error);
+            console.log('Error updating Warehouse:', error);
             return NextResponse.json(
                 {
                     error: error.message,
-                    message: "Failed to update the brand"
+                    message: "Failed to update the Warehouse"
                 },
                 { status: 500 }
             );

@@ -1,16 +1,16 @@
 import React from 'react'
 import { getDataById } from '@/lib/getDataByid'
-import NewItem from '../../new/page'
-import NewWareHouse from '../../../WareHouse/new/page'
+
+import NewSupplier from '../../new/page'
 export default async function Update({params:id}) {
   
-    const data=await getDataById('Warehouse',id)
+    const data=await getDataById('Supplier',id)
     console.log('from form err',data,id)
     
   return (
 
 
-      <NewWareHouse initialData={data} isupdate={true}/>
+      <NewSupplier initialData={data} isupdate={true}/>
  
     
   )

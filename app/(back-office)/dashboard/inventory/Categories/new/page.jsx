@@ -7,11 +7,13 @@ import SubumitButton from "@/Components/FormInputs/SubumitButton";
 import TextAreaInputs from "@/Components/FormInputs/TextAreaInputs";
 import toast from "react-hot-toast";
 import { makePOSTApiRequest, makePUTApiRequest } from "@/lib/apiRequest";
+import { useRouter } from "next/navigation";
 
 export default function NewCategory(props) {
   var isupdate=false;
   var initialData={}
   var {isupdate,initialData}=props
+  const router=useRouter()
   console.log(initialData.title)
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [loading,setLoading]=React.useState(false)
