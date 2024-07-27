@@ -6,21 +6,38 @@ import SubumitButton from "@/Components/FormInputs/SubumitButton";
 import TextAreaInputs from "@/Components/FormInputs/TextAreaInputs";
 import SelectComponent from "@/Components/FormInputs/SelectComponent";
 import ImageInput from "@/Components/FormInputs/ImageInput";
-import { makePOSTApiRequest } from "@/lib/apiRequest";
+import { makePOSTApiRequest, makePUTApiRequest } from "@/lib/apiRequest";
 
 export default  function CreateItemFrom(props) {
   console.log(props.initialData)
   const {categories,units,brands,warehouses,suppliers,initialData={},isupdate}=props
-  const [imageUrl,setImageUrl]=React.useState('')
+  const [imageUrl,setImageUrl]=React.useState(props.initialData.imageUrl)
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [loading,setLoading]=React.useState(false)
 
 
   async function onSubmit(data){
-    data.imageURL=imageUrl
-   makePOSTApiRequest('Item',setLoading,data,'Items')
+    
+    if(isupdate){
+      // Update Request 
+      try {
+       await makePUTApiRequest(`Item/${initialData.id}`,setLoading,data,'Items')
+         done=true
+         if(done==true){
+          router.replace('/dashboard/inventory/Items')
+       }
+      } catch (error) {
+        console.log(error)
+      }
+     
+    }
+    else{
+      data.imageURL=imageUrl
+      makePOSTApiRequest('Item',setLoading,data,'Items')
+     
+      setImageUrl('');
+    }
   
-   setImageUrl('');
   }
 
   return (

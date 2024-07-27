@@ -4,7 +4,7 @@ import { getData } from '@/lib/getData'
 import React from 'react'
 
 export default async function Items() {
-  const columns=['title','description','sku']
+  const columns=['title','description','sku','imagesUrl','supplier.name']
   const Items=await getData('Item')
   console.log(Items)
   return (

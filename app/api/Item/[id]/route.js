@@ -29,18 +29,18 @@ export async function GET (request,{params:{id}}){
     export async function PUT(request, { params }) {
         try {
             const  data  = await request.json();
-           
+           console.log('from item',data)
     
             const Item = await db.item.update({
                 where: {
                     id: params.id
                 },
                 data: {
-                    title: data.title
+                    title: data.ItemName
                 },
             });
     
-            console.log('Updated item:', brand);
+            console.log('Updated item:', Item);
             return NextResponse.json(Item);
         } catch (error) {
             console.log('Error updating Item:', error);

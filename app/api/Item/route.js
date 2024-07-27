@@ -29,7 +29,7 @@ barcode:ItemBarcode ,
 quantity:ItemQuantity ,                                   
 unitId:'6697aad532bca774664acf33' ,                                     
 brandId:'669690abe64c126353666139' ,                               
-supplierid:'6697d793458ba5649ff0b048' ,              
+supplierid:'669904e60cc9f116a43394e1' ,              
 costPrice:ItemCostPrice   ,            
 sellingPrice:ItemSellingPrice  ,           
 reorderPoint:ItemReorderPoint  ,           
@@ -67,7 +67,8 @@ export async function GET (request){
             createdAt:'desc' //gets the latest warehouse
         },
         include:{
-            category:true
+            category:true,
+            supplier:true,
         }
     })
     return NextResponse.json(Items);
