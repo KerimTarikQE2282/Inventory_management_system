@@ -1,9 +1,11 @@
 "use client"
 import React from 'react'
+import { useRouter } from 'next/navigation';
 import {  Trash2 } from 'lucide-react'
 import Swal from 'sweetalert2'
 
 export default function DeleteBtn(props) {
+  const router = useRouter();
     const {resourceTitle,id}=props
     console.log(resourceTitle,id)
     async function  handleDelete(){
@@ -20,8 +22,10 @@ export default function DeleteBtn(props) {
         confirmButtonText: "Yes, delete it!"
       }).then(async (result) => {
         if (result.isConfirmed) {
-            const res= await fetch(`http://localhost:3000/api/${resourceTitle}?id=${id}`,{
+             await fetch(`http://localhost:3000/api/${resourceTitle}?id=${id}`,
+              {
            method:'DELETE'})
+           router.refresh();
           Swal.fire({
             title: "Deleted!",
             text: "Your file has been deleted.",

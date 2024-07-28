@@ -7,15 +7,15 @@ import TextAreaInputs from "@/Components/FormInputs/TextAreaInputs";
 import SelectComponent from "@/Components/FormInputs/SelectComponent";
 import ImageInput from "@/Components/FormInputs/ImageInput";
 import { makePOSTApiRequest, makePUTApiRequest } from "@/lib/apiRequest";
-
+import { useRouter } from 'next/navigation';
 export default  function CreateItemFrom(props) {
   console.log(props.initialData)
   const {categories,units,brands,warehouses,suppliers,initialData={},isupdate}=props
-  const [imageUrl,setImageUrl]=React.useState(props.initialData.imageUrl)
+  const [imageUrl,setImageUrl]=React.useState(props.isupdate==true ? props.initialData?.imageUrl :'')
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [loading,setLoading]=React.useState(false)
-
-
+  const router = useRouter();
+  router.refresh();
   async function onSubmit(data){
     
     if(isupdate){
