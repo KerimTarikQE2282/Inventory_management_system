@@ -1,6 +1,7 @@
 import { Columns, Pencil, Trash } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
+import DeleteBtn from './SideBarComponents/DeleteBtn'
 
 export default function DataTable({Data,columns=[''],resourceTitle}) {
  
@@ -67,7 +68,7 @@ export default function DataTable({Data,columns=[''],resourceTitle}) {
                    
                 </td>
                 <td>
-                <Link href={''} className='font-medium text-blue item-center space-x-2 text-red-600'><Trash className='text'/></Link>
+               <DeleteBtn resourceTitle={resourceTitle} id={mydata.id}/>
                 </td>
             </tr>
         )

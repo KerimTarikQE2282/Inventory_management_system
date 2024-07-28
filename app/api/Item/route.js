@@ -83,3 +83,21 @@ export async function GET (request){
             ); 
     }
     }
+
+
+export async function DELETE (request){
+       try {
+        const id=request.nextUrl.searchParams.get('id')
+        console.log(id)
+        
+       } catch (error) {
+        console.log(error)
+        return NextResponse.json(
+            {
+                error,
+                message: "Failed to Delete  the Items"
+            },
+            { status: 500 }
+        ); 
+       }
+        }
