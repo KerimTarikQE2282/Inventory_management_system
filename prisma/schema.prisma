@@ -39,6 +39,8 @@ model Item {
   notes                    String?
   AddStockAdjustments      AddStockAdjustments[]
   TransferStockAdjustments TransferStockAdjustments[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Category {
@@ -46,12 +48,16 @@ model Category {
   title       String
   description String?
   Item        Item[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Brands {
   id        String @id @default(auto()) @map("_id") @db.ObjectId
   BrandName String
   Item      Item[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Units {
@@ -59,6 +65,8 @@ model Units {
   UnitName        String
   UnitAbreviation String?
   Item            Item[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model WareHouse {
@@ -70,6 +78,8 @@ model WareHouse {
   AddStockAdjustments               AddStockAdjustments[]
   sendingTransferStockAdjustments   TransferStockAdjustments[] @relation("SendingWareHouse")
   recievingTransferStockAdjustments TransferStockAdjustments[] @relation("RecievingWareHouse")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model AddStockAdjustments {
@@ -81,6 +91,8 @@ model AddStockAdjustments {
   AddingInventoryNotes String
   item                 Item      @relation(fields: [itemid], references: [id])
   itemid               String    @db.ObjectId
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model TransferStockAdjustments {
@@ -94,6 +106,8 @@ model TransferStockAdjustments {
   Notes              String
   item               Item      @relation(fields: [itemid], references: [id])
   itemid             String    @db.ObjectId
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }
 
 model Supplier {
@@ -108,4 +122,6 @@ model Supplier {
   taxID         String?
   notes         String?
   Item          Item[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 }

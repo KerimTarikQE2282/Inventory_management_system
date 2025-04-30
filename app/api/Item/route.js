@@ -23,13 +23,13 @@ export async function POST(request) {
 
 title :ItemName  ,                 
 description:ItemDescription   ,                            
- categoryId:'6696875a8212d69a17d385d0'  ,             
+ categoryId:'6699060e0cc9f116a43394e4'  ,             
 sku:ItemSKU        ,              
 barcode:ItemBarcode ,                 
 quantity:ItemQuantity ,                                   
 unitId:'6697aad532bca774664acf33' ,                                     
 brandId:'669690abe64c126353666139' ,                               
-supplierid:'6697d793458ba5649ff0b048' ,              
+supplierid:'669904e60cc9f116a43394e1' ,              
 costPrice:ItemCostPrice   ,            
 sellingPrice:ItemSellingPrice  ,           
 reorderPoint:ItemReorderPoint  ,           
@@ -58,3 +58,68 @@ notes:ItemNotes,
         ); 
     }
 }
+
+export async function GET (request){
+    try {
+        
+    const Items=await db.item.findMany({
+        orderBy:{
+            createdAt:'desc' //gets the latest warehouse
+        },
+        include:{
+            category:true,
+            supplier:true,
+        }
+    })
+    return NextResponse.json(Items);
+    } catch (error) {
+         console.log(error);
+            return NextResponse.json(
+                {
+                    error,
+                    message: "Failed to Fetch  the Items"
+                },
+                { status: 500 }
+            ); 
+    }
+    }
+
+    
+    
+    
+
+
+
+
+
+
+
+    export async function DELETE(request) {
+        try {
+             const id = request.nextUrl.searchParams.get('id');
+            console.log(id);
+   
+            const deletedItems=await db.item.delete({
+                where:{
+                    id:id
+                }
+            })
+
+            return NextResponse.json(
+                {
+                    message: "Item deleted successfully",
+                    id: id
+                },
+                { status: 200 }
+            );
+        } catch (error) {
+            console.log(error);
+            return NextResponse.json(
+                {
+                    error: error.message,
+                    message: "Failed to delete the item"
+                },
+                { status: 500 }
+            );
+        }
+    }

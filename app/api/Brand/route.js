@@ -31,3 +31,23 @@ export async function POST(request) {
         ); 
     }
 }
+export async function GET (request){
+    try {
+        
+    const Brands=await db.brands.findMany({
+        orderBy:{
+            createdAt:'desc' //gets the latest warehouse
+        }
+    })
+    return NextResponse.json(Brands);
+    } catch (error) {
+         console.log(error);
+            return NextResponse.json(
+                {
+                    error,
+                    message: "Failed to Fetch  the Brands"
+                },
+                { status: 500 }
+            ); 
+    }
+    }

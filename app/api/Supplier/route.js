@@ -17,17 +17,7 @@ export async function POST(request) {
          } = await request.json();
 
         // Log the parsed JSON correctly
-        console.log({ 
-            name,
-            phone,
-            email,
-            address,
-            contactPerson,
-            supplierCode,
-            taxID,
-            paymentTerms:PaymentTerms,
-            notes,
-         });
+        
 
         const AddedSuppliers=await db.supplier.create({
             data:{
@@ -59,3 +49,24 @@ export async function POST(request) {
         ); 
     }
 }
+
+export async function GET (request){
+    try {
+        
+    const Suppliers=await db.supplier.findMany({
+        orderBy:{
+            createdAt:'desc' //gets the latest warehouse
+        }
+    })
+    return NextResponse.json(Suppliers);
+    } catch (error) {
+         console.log(error);
+            return NextResponse.json(
+                {
+                    error,
+                    message: "Failed to Fetch  the Suppliers"
+                },
+                { status: 500 }
+            ); 
+    }
+    }

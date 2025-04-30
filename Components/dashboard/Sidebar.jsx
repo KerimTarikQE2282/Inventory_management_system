@@ -17,7 +17,7 @@ function Sidebar() {
 
   return (
  
-       <div className='flex  flex-col w-60 min-h-screen bg-slate-800  text-slate-50 justify-between fixed'> 
+       <div className='  flex-col w-60 min-h-screen bg-slate-800  text-slate-50 justify-between fixed hidden sm:flex'> 
        {
         /*top part*/
        }
